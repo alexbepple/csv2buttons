@@ -6,7 +6,7 @@ import xing
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 
-pdfmetrics.registerFont(TTFont('GillSans-Bold', 'GillSansBold.ttf'))
+pdfmetrics.registerFont(TTFont('default', 'GillSansBold.ttf'))
 
 pdf_filename = "example.pdf"
 template = TemplateFor55Buttons(pdf_filename)
