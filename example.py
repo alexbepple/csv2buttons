@@ -17,15 +17,18 @@ pdfmetrics.registerFont(TTFont('GillSans-Bold', 'GillSansBold.ttf'))
 pdf_filename = "example.pdf"
 template = TemplateFor55Buttons(pdf_filename)
 
-sheet = ButtonSheet()
-sheet.add_button("Gill Sans")
-sheet.add_button("Joanna")
-sheet.add_button("Myriad")
-sheet.add_button("Calibri")
-sheet.add_button("Consolas")
-sheet.add_button("Bookman Old Style")
-sheet.add_button("Scala")
-sheet.build(template, FlowableFactory())
+import xing
+names = xing.extract_names_from_csv("""
+"Gill Sans"	"Gill"	"Sans"
+"Joanna"	""	""
+"Myriad"	""	""
+"Calibri"	""	""
+"Consolas"	""	""
+"Bookman Old Style"	"Bookman"	"Old Style"
+"Scala"	""	""
+""")
+
+ButtonSheet().add_buttons(names).build(template, FlowableFactory())
 
 from subprocess import call
 call(["xdg-open", pdf_filename])

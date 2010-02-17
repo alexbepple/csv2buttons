@@ -7,6 +7,12 @@ class ButtonSheet:
 
     def add_button(self, text):
         self.button_texts.append(text)
+        return self
+    
+    def add_buttons(self, texts):
+        for text in texts:
+            self.add_button(text)
+        return self
 
     def build(self, template, flowable_factory):
         paras = [flowable_factory.create_paragraph(text) for text in self.button_texts]
