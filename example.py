@@ -18,7 +18,13 @@ pdf_filename = "example.pdf"
 template = TemplateFor55Buttons(pdf_filename)
 
 sheet = ButtonSheet()
-sheet.add_button("Peter Graf")
+sheet.add_button("Gill Sans")
+sheet.add_button("Joanna")
+sheet.add_button("Myriad")
+sheet.add_button("Calibri")
+sheet.add_button("Consolas")
+sheet.add_button("Bookman Old Style")
+sheet.add_button("Scala")
 sheet.build(template, FlowableFactory())
 
 from subprocess import call

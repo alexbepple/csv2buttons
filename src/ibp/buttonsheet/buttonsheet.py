@@ -3,10 +3,17 @@
 
 class ButtonSheet:
 
+    button_texts = []
+
     def add_button(self, text):
-        self.button_text = text
+        self.button_texts.append(text)
 
     def build(self, template, flowable_factory):
-        paragraph = flowable_factory.createParagraph(self.button_text)
-        template.build([paragraph])
+        paras = [flowable_factory.create_paragraph(text) for text in self.button_texts]
+        separators = [flowable_factory.create_separator()] * len(paras)
+        
+        intertwined = sum([[x, y] for x, y, in zip(paras, separators)], [])
+        story = intertwined[:-1]
+        
+        template.build(story)
 
