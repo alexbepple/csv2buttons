@@ -1,11 +1,3 @@
-from reportlab.pdfgen.canvas import Canvas
-
-#pdf = Canvas("test.pdf")
-#pdf.drawImage("logo.jpg", 20, 500, width=100, preserveAspectRatio=True)
-#pdf.showPage()
-#pdf.save()
-
-
 from ibp.buttonsheet import ButtonSheet
 from ibp.templates import TemplateFor55Buttons
 from ibp.elements import FlowableFactory
@@ -17,8 +9,11 @@ pdfmetrics.registerFont(TTFont('GillSans-Bold', 'GillSansBold.ttf'))
 pdf_filename = "example.pdf"
 template = TemplateFor55Buttons(pdf_filename)
 
+#with open('example.csv')
+
 import xing
 names = xing.extract_names_from_csv("""
+xing_name	last_name	first_name
 "Gill Sans"	"Gill"	"Sans"
 "Joanna"	""	""
 "Myriad"	""	""

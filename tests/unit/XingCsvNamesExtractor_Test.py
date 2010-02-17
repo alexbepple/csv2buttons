@@ -20,4 +20,13 @@ class XingCsvNamesExtractor_Test:
 "Joanna"	"was"	"born"
 """)
         assert_equal(["Joanna"], names)
-    
+
+
+    @istest
+    def ignores_header_which_is_discernible_by_lack_of_quotation(self):
+        names = xing.extract_names_from_csv("""
+name
+"Joanna"
+""")
+        assert_equal(["Joanna"], names)
+
