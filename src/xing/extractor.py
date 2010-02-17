@@ -3,17 +3,14 @@
 
 import csv
 
-def extract_names_from_csv(csv_contents):
-    lines = csv_contents.split('\n')
-    
-    def not_empty(string):
-        return string
-    def not_header(string):
+def extract_names_from_csv(lines):
+
+    def only_data(string):
         return string.startswith('"')
-    lines_with_data = filter(not_header, filter(not_empty, lines))
-    csv_reader = csv.reader(lines_with_data, delimiter='\t')
-    entries_in_first_column = [row[0] for row in csv_reader]
+        
+    def entries_in_first_column(lines):
+        csv_reader = csv.reader(lines, delimiter='\t')
+        return [row[0] for row in csv_reader]
     
-    all_data_entries = entries_in_first_column
-    return all_data_entries
+    return entries_in_first_column(filter(only_data, lines))
 
