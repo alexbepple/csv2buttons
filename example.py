@@ -6,7 +6,7 @@ from reportlab.pdfgen.canvas import Canvas
 #pdf.save()
 
 
-from buttonsheet import ButtonSheet
+from ibp.buttonsheet import ButtonSheet
 from ibp.templates import TemplateFor55Buttons
 from ibp.elements import FlowableFactory
 
