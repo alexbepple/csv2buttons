@@ -6,17 +6,21 @@ import xing
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 
+import codecs
+from subprocess import call
+
+
 pdfmetrics.registerFont(TTFont('default', 'GillSansBold.ttf'))
 
-pdf_filename = "example.pdf"
+pdf_filename = "xing.pdf"
 template = TemplateFor55Buttons(pdf_filename)
 
-with open('example.csv', 'r') as f:
-    csv_contents = f.readlines() 
-names = xing.extract_names_from_csv(csv_contents)
+with codecs.open('xing.csv', encoding='utf-16-le') as f:
+    lines = f.readlines()
+lines = [line.encode('utf-8') for line in lines]
 
+names = xing.extract_names_from_csv(lines)
 ButtonSheet().add_buttons(names).build(template, FlowableFactory())
 
-from subprocess import call
 call(["xdg-open", pdf_filename])
 
