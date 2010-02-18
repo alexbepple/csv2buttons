@@ -27,10 +27,8 @@ class TemplateFor55Buttons(BaseDocTemplate):
     
 
 class ButtonRenderer:
-    # This actually creates 68 mm. Why?         
-    outer_size = 78*mm
-    
-    inner_size = 65*mm
+    outer_size = 68*mm
+    inner_size = 55*mm
     
     def create_frame(self, x, y):
         return Frame(x, y, self.outer_size, self.outer_size, topPadding = self.outer_size / 2 - 10, showBoundary=True)
