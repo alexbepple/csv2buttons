@@ -20,7 +20,7 @@ class TemplateFor55Buttons(BaseDocTemplate):
         
     def _create_frames(self, frames=[]):
         x_positions = [70, 300]
-        y_positions = [20, 300, 600]
+        y_positions = [20, 260, 500]
         for x in x_positions:
             frames.extend([self.button_renderer.create_frame(x, y) for y in y_positions])
         return frames
@@ -38,9 +38,9 @@ class ButtonRenderer:
         self.render_inner_circle(frame, canvas)
     
     def render_logo(self, frame, canvas):
-        width = self.inner_size - 40
-        left_offset = 40
-        top_offset = 80
+        width = self.inner_size - 50
+        left_offset = 45
+        top_offset = 85
         canvas.drawImage("logo.png", frame.x1+left_offset, frame.y1+self.outer_size-top_offset, width=width, preserveAspectRatio=True)
 
     def render_inner_circle(self, frame, canvas):
