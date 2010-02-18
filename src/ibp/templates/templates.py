@@ -31,7 +31,7 @@ class ButtonRenderer:
     inner_size = 55*mm
     
     def create_frame(self, x, y):
-        return Frame(x, y, self.outer_size, self.outer_size, topPadding = self.outer_size / 2 - 10, showBoundary=True)
+        return Frame(x, y, self.outer_size, self.outer_size, leftPadding=20, rightPadding=20, topPadding = self.outer_size / 2 - 10, showBoundary=True)
 
     def render_button(self, frame, canvas):
         self.render_logo(frame, canvas)

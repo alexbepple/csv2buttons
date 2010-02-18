@@ -12,4 +12,4 @@ class FlowableFactory:
         return doctemplate.FrameBreak
     
     def createStyle(self):
-        return ParagraphStyle("Normal", alignment = TA_CENTER, fontName='default', fontSize=18)
+        return ParagraphStyle("Normal", alignment = TA_CENTER, fontName='default', fontSize=18, leading=24)
