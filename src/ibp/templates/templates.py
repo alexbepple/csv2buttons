@@ -4,24 +4,47 @@
 from reportlab.platypus import BaseDocTemplate, PageTemplate, Frame
 from reportlab.lib.units import mm
 
-class TemplateFor55Buttons:
+
+class TemplateFor55Buttons(BaseDocTemplate):
 
     def __init__(self, filename):
-        self.template = BaseDocTemplate(filename)
-        page_template = PageTemplate(frames=self._createFrames())
-        self.template.addPageTemplates(page_template)
+        BaseDocTemplate.__init__(self, filename)
+        self.button_renderer = ButtonRenderer()
         
-    def build(self, story):
-        self.template.build(story)
-
-    def _createFrames(self, frames=[]):
-        # This actually creates 68 mm. Why?         
-        size = 78 * mm
+        page_template = PageTemplate(frames=self._create_frames())
+        self.addPageTemplates(page_template)
+        
+    def handle_frameBegin(self, resume = 0):
+        self.button_renderer.render_button(self.frame, self.canv)
+        self._handle_frameBegin()
+        
+    def _create_frames(self, frames=[]):
         x_positions = [70, 300]
         y_positions = [20, 300, 600]
         for x in x_positions:
-            frames.extend([self._createFrame(x, y, size) for y in y_positions])
+            frames.extend([self.button_renderer.create_frame(x, y) for y in y_positions])
         return frames
     
-    def _createFrame(self, x, y, size):
-        return Frame(x, y, size, size, topPadding = size / 2 - 10, showBoundary=True)
+
+class ButtonRenderer:
+    # This actually creates 68 mm. Why?         
+    outer_size = 78*mm
+    
+    inner_size = 65*mm
+    
+    def create_frame(self, x, y):
+        return Frame(x, y, self.outer_size, self.outer_size, topPadding = self.outer_size / 2 - 10, showBoundary=True)
+
+    def render_button(self, frame, canvas):
+        self.render_logo(frame, canvas)
+        self.render_inner_circle(frame, canvas)
+    
+    def render_logo(self, frame, canvas):
+        width = self.inner_size - 40
+        left_offset = 40
+        top_offset = 80
+        canvas.drawImage("logo.png", frame.x1+left_offset, frame.y1+self.outer_size-top_offset, width=width, preserveAspectRatio=True)
+
+    def render_inner_circle(self, frame, canvas):
+        canvas.circle(frame.x1 + self.outer_size / 2, frame.y1 + self.outer_size /2, self.inner_size / 2 + 5)
+
